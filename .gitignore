@@ -11,6 +11,9 @@
 # Visual Studio cache directory
 .vs/
 
+# Mediapipe foldier
+.Mediapipe/
+./StreamingAssets
 # Gradle cache directory
 .gradle/
 
