@@ -4,15 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [Header("Scene Names")]
-    [SerializeField] private Scene Login_Scene;
-    [SerializeField] private Scene SignUp_Scene;
-    private string loginSceneName;
-    private string signUpSceneName;
-
-    private void Start() {
-        signUpSceneName = SignUp_Scene.name;
-        loginSceneName = Login_Scene.name;
-    }
+    [SerializeField] private string loginSceneName;
+    [SerializeField] private string signUpSceneName;
+    [SerializeField] private string recoverPassword;
         
     public void SignUpButtonClickedFromLogin() {
         StartCoroutine(LoadSceneAsync(signUpSceneName));
