@@ -9,6 +9,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+
 namespace Mediapipe.Unity
 {
   public class StaticImageSource : ImageSource
@@ -30,6 +31,7 @@ namespace Mediapipe.Unity
 
     private Texture2D _outputTexture;
     private Texture _image;
+
     private Texture image
     {
       get
