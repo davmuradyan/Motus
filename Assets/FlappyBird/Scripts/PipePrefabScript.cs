@@ -16,4 +16,8 @@ public class PipePrefabScript : MonoBehaviour
             isAvaiable = true;
         }
     }
+
+    public bool IsAvailabe() {
+        return isAvaiable;
+    }
 }
