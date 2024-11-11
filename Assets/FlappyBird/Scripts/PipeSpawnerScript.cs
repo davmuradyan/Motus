@@ -13,19 +13,30 @@ public class PipeSpawnerScript : MonoBehaviour
     [SerializeField] float maxHeightPipes = 3;
     [SerializeField] float minHeightPipes = -3;
 
-    bool isArrayNull = true;
-    CustomArray<PipePrefabScript> Pipes;
+    [Header("Scripts")]
+    [SerializeField] BirdScript birdScript;
+
+    [Header("Private Variables")]
+    private bool isBirdDied;
+    private bool isArrayNull;
+    private CustomArray<PipePrefabScript> Pipes;
 
     private void Start() {
+        isBirdDied = false;
+        isArrayNull = true;
         StartCoroutine(PipeTimer());
+        birdScript.BirdDied += BirdDied;
     }
+
+    // Spawn pipes every 3 seconds
     IEnumerator PipeTimer() {
-        while (true)
+        while (!isBirdDied)
         {
             yield return new WaitForSeconds(timerForPipes);
             InitializePipe();
         }
     }  
+    // Makes pipes or reuses avaiable ones
     void InitializePipe() {
         GameObject newPipe = null;
 
@@ -53,6 +64,7 @@ public class PipeSpawnerScript : MonoBehaviour
             }
         }
     }
+    // Checks if there are avaiable pipes
     private GameObject CheckArray() {
         GameObject newPipe = null;
 
@@ -66,7 +78,12 @@ public class PipeSpawnerScript : MonoBehaviour
 
         return newPipe;
     } 
+    // Decides random height of pipes for spawning
     private float DecideHeight() {
         return Random.Range(minHeightPipes, maxHeightPipes);
+    }
+    // Function for bird die event
+    private void BirdDied() {
+        isBirdDied = true;
     }
 }
