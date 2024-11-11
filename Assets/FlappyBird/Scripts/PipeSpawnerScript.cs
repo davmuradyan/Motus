@@ -20,6 +20,7 @@ public class PipeSpawnerScript : MonoBehaviour
     private bool isBirdDied;
     private bool isArrayNull;
     private CustomArray<PipePrefabScript> Pipes;
+    private bool isHandFound = false;
 
     private void Start() {
         isBirdDied = false;
@@ -30,12 +31,16 @@ public class PipeSpawnerScript : MonoBehaviour
 
     // Spawn pipes every 3 seconds
     IEnumerator PipeTimer() {
-        while (!isBirdDied)
-        {
-            yield return new WaitForSeconds(timerForPipes);
-            InitializePipe();
+        while (true) {
+            if (!isBirdDied && isHandFound) {
+                yield return new WaitForSeconds(timerForPipes);
+                InitializePipe();
+            } else {
+                yield return null;
+            }
         }
-    }  
+    }
+
     // Makes pipes or reuses avaiable ones
     void InitializePipe() {
         GameObject newPipe = null;
@@ -85,5 +90,10 @@ public class PipeSpawnerScript : MonoBehaviour
     // Function for bird die event
     private void BirdDied() {
         isBirdDied = true;
+    }
+
+    // Function to change the value of isHandFound bool variable
+    internal void HandIsFound(bool isFound) {
+        isHandFound = isFound;
     }
 }

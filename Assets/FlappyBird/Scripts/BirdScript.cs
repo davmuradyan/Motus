@@ -7,6 +7,7 @@ public class BirdScript : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] private ScoreKeeperScript scoreKeeper;
+    [SerializeField] private SignalGenerator signalGenerator;
 
     [Header("Private variables")]
     private bool isDead;
@@ -65,12 +66,8 @@ public class BirdScript : MonoBehaviour
 
     // Function to move the bird
     private void MoveBird() {
-        float signal = GetSignal();
+        float signal = signalGenerator.GetSignal();
         float height = ConvertSignal(signal);
         transform.position = new Vector3(transform.position.x, height, 0);
-    }
-    private float GetSignal() {
-         variable += 0.2f * Time.deltaTime;
-         return variable;
     }
 }
