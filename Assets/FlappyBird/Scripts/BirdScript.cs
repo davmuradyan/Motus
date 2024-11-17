@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BirdScript : MonoBehaviour
@@ -8,23 +7,43 @@ public class BirdScript : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private ScoreKeeperScript scoreKeeper;
     [SerializeField] private SignalGenerator signalGenerator;
+    [SerializeField] private PipeSpawnerScript pipeSpawner;
+    [SerializeField] private LocalManager localManager;
 
     [Header("Private variables")]
     private bool isDead;
     [SerializeField] private float minAllowedHeight;
     [SerializeField] private float maxAllowedHeight;
-
-    float variable = 0;
+    [SerializeField] private float initialX;
+    [SerializeField] private float initialY;
 
     // The event when bird dies
     public event Action BirdDied;
 
+    private void Awake() {
+        SubscribeFunctionsToBirdDied();
+    }
     private void Start() {
-        isDead = false;
+        InitializeBird();
+    }
+
+    // Subscribes all necessary functions to BirdDied event
+    private void SubscribeFunctionsToBirdDied() {
+        BirdDied += pipeSpawner.BirdDied;
+        BirdDied += scoreKeeper.ScoreForEndgame;
     }
 
     private void Update() {
         MoveBird();
+    }
+
+    // Function to initialize the bird
+    internal void InitializeBird() {
+        transform.position = new Vector3(initialX, initialY, 0);
+        isDead = false;
+        gameObject.SetActive(true);
+        pipeSpawner.isBirdDied = isDead;
+        transform.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
     // Function to add score when passes pipes
@@ -49,7 +68,8 @@ public class BirdScript : MonoBehaviour
         BirdDied?.Invoke();
 
         yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        localManager.BirdDied();
     }
 
     // Function to convert signal into height of bird
@@ -66,8 +86,10 @@ public class BirdScript : MonoBehaviour
 
     // Function to move the bird
     private void MoveBird() {
-        float signal = signalGenerator.GetSignal();
-        float height = ConvertSignal(signal);
-        transform.position = new Vector3(transform.position.x, height, 0);
+        if (!isDead) {
+            float signal = signalGenerator.GetSignal();
+            float height = ConvertSignal(signal);
+            transform.position = new Vector3(transform.position.x, height, 0);
+        }
     }
 }
