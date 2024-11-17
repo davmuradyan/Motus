@@ -41,15 +41,16 @@ public class SignalGenerator : MonoBehaviour {
     // This function will try to find the hand
     private void TryToFindHand() {
         if (MultiHandLandmarkList.transform.childCount >= 1) {
-            Initializer();
+            ArrayInitializer();
             hasFoundTheHand = true;
             pipeSpawner.HandIsFound(true);
         }
     }
+
     // This function retrieves 21 points
     // This function names 21 points
     // This function adds 21 points to our array
-    private void Initializer() {
+    private void ArrayInitializer() {
         GameObject LandMarkAnnotation = MultiHandLandmarkList.transform.GetChild(0).gameObject;
         GameObject Points = LandMarkAnnotation.transform.GetChild(0).gameObject;
         for (int i = 0; i < 21; i++) {

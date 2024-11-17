@@ -17,16 +17,19 @@ public class PipeSpawnerScript : MonoBehaviour
     [SerializeField] BirdScript birdScript;
 
     [Header("Private Variables")]
-    private bool isBirdDied;
+    internal bool isBirdDied;
     private bool isArrayNull;
-    private CustomArray<PipePrefabScript> Pipes;
+    private CustomArray Pipes;
     private bool isHandFound = false;
 
     private void Start() {
-        isBirdDied = false;
+        StartCanvas();
+    }
+    // Function to start the canvas
+    internal void StartCanvas() {
+        isHandFound = false;
         isArrayNull = true;
         StartCoroutine(PipeTimer());
-        birdScript.BirdDied += BirdDied;
     }
 
     // Spawn pipes every 3 seconds
@@ -50,7 +53,7 @@ public class PipeSpawnerScript : MonoBehaviour
         {
             newPipe = Instantiate(PipePrefab);
             newPipe.transform.position = new Vector3(transform.position.x, DecideHeight(), 0);
-            Pipes = new CustomArray<PipePrefabScript>(newPipe.transform.GetComponent<PipePrefabScript>());
+            Pipes = new CustomArray(newPipe.transform.GetComponent<PipePrefabScript>());
             isArrayNull = false;
         }
         else
@@ -87,11 +90,15 @@ public class PipeSpawnerScript : MonoBehaviour
     private float DecideHeight() {
         return Random.Range(minHeightPipes, maxHeightPipes);
     }
+
     // Function for bird die event
-    private void BirdDied() {
+    internal void BirdDied() {
         isBirdDied = true;
     }
-
+    // Function to start again
+    internal void StartAgain() {
+        isBirdDied = false;
+    }
     // Function to change the value of isHandFound bool variable
     internal void HandIsFound(bool isFound) {
         isHandFound = isFound;
