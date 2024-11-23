@@ -16,6 +16,7 @@ public class BirdScript : MonoBehaviour
     [SerializeField] private float maxAllowedHeight;
     [SerializeField] private float initialX;
     [SerializeField] private float initialY;
+    [SerializeField] private float timeToDie;
 
     // The event when bird dies
     public event Action BirdDied;
@@ -69,7 +70,7 @@ public class BirdScript : MonoBehaviour
         transform.GetComponent<Rigidbody2D>().gravityScale = 1;
         BirdDied?.Invoke();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(timeToDie);
         gameObject.SetActive(false);
         localManager.BirdDied();
     }
