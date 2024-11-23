@@ -13,12 +13,14 @@ public class SignalGenerator : MonoBehaviour {
 
     [Header("Private variables")]
     private bool hasFoundTheHand = false;
+    private bool killingChildren = false;
+    private bool isBirdDied = false;
 
     [Header("Scripts")]
     [SerializeField] PipeSpawnerScript pipeSpawner;
 
     private void Update() {
-        if (!hasFoundTheHand) {
+        if (!hasFoundTheHand && !killingChildren && !isBirdDied) {
             TryToFindHand();
         }
     }
@@ -29,8 +31,10 @@ public class SignalGenerator : MonoBehaviour {
     // Note: Don't change the function name. Function is already linked to the bird
     internal float GetSignal() {
         // Write your code here...
-        return 0;
+        return 1;
     }
+
+
 
     // Write your code here...
 
@@ -40,10 +44,10 @@ public class SignalGenerator : MonoBehaviour {
 
     // This function will try to find the hand
     private void TryToFindHand() {
-        if (MultiHandLandmarkList.transform.childCount >= 1) {
-            ArrayInitializer();
-            hasFoundTheHand = true;
-            pipeSpawner.HandIsFound(true);
+        if (MultiHandLandmarkList.activeSelf) {
+                ArrayInitializer();
+                hasFoundTheHand = true;
+                pipeSpawner.HandIsFound(true);
         }
     }
 
@@ -57,6 +61,14 @@ public class SignalGenerator : MonoBehaviour {
             GameObject Child = Points.transform.GetChild(i).gameObject;
             Child.name = $"Point {i}";
             points[i] = Child;
+            Debug.Log(points[i].name);
         }
+    }
+    internal void Initialize() {
+        hasFoundTheHand = false;
+        isBirdDied = false;
+    }
+    internal void BirdDied() {
+        isBirdDied = true;
     }
 }

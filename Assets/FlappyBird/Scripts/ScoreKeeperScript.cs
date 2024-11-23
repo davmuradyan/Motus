@@ -38,13 +38,24 @@ public class ScoreKeeperScript : MonoBehaviour
             highestScore = score;
 
             // Change hihest score on the server...
+            SendHighestScore();
         }
         HighestScore_TMP.text = score.ToString();
         Score_TMP.text = "" + 0;
+        SendScore();
         score = 0;
     }
     // Function to get highest score (not written)
     internal void GetHighestScore() {
         highestScore = 0;
+    }
+
+    // Function to send point to DB
+    internal void SendScore() {
+        Debug.Log(score);
+    }
+
+    internal void SendHighestScore() {
+        Debug.Log(highestScore);
     }
 }

@@ -31,6 +31,7 @@ public class BirdScript : MonoBehaviour
     private void SubscribeFunctionsToBirdDied() {
         BirdDied += pipeSpawner.BirdDied;
         BirdDied += scoreKeeper.ScoreForEndgame;
+        BirdDied += signalGenerator.BirdDied;
     }
 
     private void Update() {
@@ -44,11 +45,12 @@ public class BirdScript : MonoBehaviour
         gameObject.SetActive(true);
         pipeSpawner.isBirdDied = isDead;
         transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     // Function to add score when passes pipes
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Pass")
+        if (collision.gameObject.tag == "Pass" && !isDead)
         {
             scoreKeeper.AddScore();
         }
@@ -56,7 +58,7 @@ public class BirdScript : MonoBehaviour
 
     // Function to kill bird when it collides with pipes
     private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.gameObject.tag == "Pipe") {
+        if(collision.gameObject.tag == "Pipe" && !isDead) {
             StartCoroutine(Die());
         }
     }

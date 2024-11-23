@@ -14,6 +14,10 @@ public class LocalManager : MonoBehaviour
     [SerializeField] private GameObject MainGame_Canvas;
     [SerializeField] private GameObject EndGame_Canvas;
 
+    [Header("Scenes")]
+    [SerializeField] private string FlappyBird_GameScene;
+    [SerializeField] private string Games_PageScene;
+
     // Event of restarting game
     internal event Action RestartGame;
 
@@ -28,6 +32,7 @@ public class LocalManager : MonoBehaviour
         RestartGame += Initialize;
         RestartGame += birdScript.InitializeBird;
         RestartGame += pipeSpawner.StartAgain;
+        RestartGame += signalGenerator.Initialize;
     }
 
     // Function to initialize canvases
@@ -45,6 +50,15 @@ public class LocalManager : MonoBehaviour
 
     // Funtion for StartAgainBtn
     public void OnPlayAgainClicked() {
-        RestartGame?.Invoke();
+        // RestartGame?.Invoke();
+        SceneManager.LoadScene(FlappyBird_GameScene);
+    }
+
+    public void OnLeaveGameClicked() {
+        // Send points to API asyncronously
+        Debug.Log("Loading");
+        pipeSpawner.leavingTheGame = true;
+        SceneManager.LoadScene(Games_PageScene);
+        Debug.Log("Loaded");
     }
 }
