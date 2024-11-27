@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SignalGenerator : MonoBehaviour {
@@ -18,6 +14,10 @@ public class SignalGenerator : MonoBehaviour {
 
     [Header("Scripts")]
     [SerializeField] PipeSpawnerScript pipeSpawner;
+
+    private void Awake() {
+        MultiHandLandmarkList.SetActive(false);
+    }
 
     private void Update() {
         if (!hasFoundTheHand && !killingChildren && !isBirdDied) {
@@ -43,7 +43,7 @@ public class SignalGenerator : MonoBehaviour {
     // No need to touch these functions
 
     // This function will try to find the hand
-    private void TryToFindHand() {
+    private async void TryToFindHand() {
         if (MultiHandLandmarkList.activeSelf) {
                 ArrayInitializer();
                 hasFoundTheHand = true;
