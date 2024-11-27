@@ -36,7 +36,7 @@ public class BirdScript : MonoBehaviour
     }
 
     private void Update() {
-        MoveBird();
+        // MoveBird();
     }
 
     // Function to initialize the bird

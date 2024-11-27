@@ -17,17 +17,33 @@ public class ScoreKeeperScript : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] BirdScript birdScript;
+    [SerializeField] BackgroundSpawnerScript backgroundSpawner;
+    [SerializeField] PipeSpawnerScript pipeSpawner;
+
+    internal event Action DayNightShift;
 
     private void Start() {
+        SubscribeToDayNightShift();
         GetHighestScore();
         score = 0;
         Score_TMP.text = score.ToString();
     }
 
+    // Function to subscribe functions to DayNightShift
+    private void SubscribeToDayNightShift() {
+        DayNightShift += backgroundSpawner.ChangeDayNight;
+    }
+
     // Function to change score text by adding +1
+    // This function invokes DayNightShift event
     internal void AddScore() {
         score++;
         Score_TMP.text = score.ToString();
+        if (score % 3 == 0)
+        {
+            DayNightShift?.Invoke();
+            pipeSpawner.DiminulePipeTime();
+        }
     }
     // Function for transfering score to EndCanvas (not complete)
     // Subscriber of BirdDied

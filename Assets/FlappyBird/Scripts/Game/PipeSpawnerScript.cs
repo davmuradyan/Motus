@@ -9,9 +9,10 @@ public class PipeSpawnerScript : MonoBehaviour
     [SerializeField] GameObject PipePrefab;
 
     [Header("Variables")]
-    [SerializeField] float timerForPipes = 3;
-    [SerializeField] float maxHeightPipes = 3;
-    [SerializeField] float minHeightPipes = -3;
+    [SerializeField] private float timerForPipes = 3;
+    [SerializeField] private float maxHeightPipes = 3;
+    [SerializeField] private float minHeightPipes = -3;
+    [SerializeField] private float levelTimerDelta = 0.1f;
 
     [Header("Scripts")]
     [SerializeField] BirdScript birdScript;
@@ -75,20 +76,7 @@ public class PipeSpawnerScript : MonoBehaviour
             }
         }
     }
-    // Checks if there are avaiable pipes
-    //private GameObject CheckArray() {
-    //    GameObject newPipe = null;
 
-    //    foreach (var pipe in Pipes) {
-    //        if (pipe.IsAvailable()) {
-    //            newPipe = pipe.gameObject;
-    //            pipe.isAvailable = false;
-    //            break;
-    //        }
-    //    }
-
-    //    return newPipe;
-    //}
     // Decides random height of pipes for spawning
     private float DecideHeight() {
         return Random.Range(minHeightPipes, maxHeightPipes);
@@ -107,5 +95,13 @@ public class PipeSpawnerScript : MonoBehaviour
     // Function to change the value of isHandFound bool variable
     internal void HandIsFound(bool isFound) {
         isHandFound = isFound;
+    }
+
+    // This function diminues the value of {timerForPipe}
+    internal void DiminulePipeTime() {
+        if (timerForPipes > 1.5)
+        {
+            timerForPipes -= levelTimerDelta;
+        }
     }
 }

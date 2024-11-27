@@ -90,4 +90,12 @@ public class BackgroundSpawnerScript : MonoBehaviour
             InitializeCity();
         }
     }
+
+    // This function changes Day-Night
+    internal void ChangeDayNight() {
+        foreach (var city in Cities)
+        {
+            city.SetDay(!city.IsDay());
+        }
+    }
 }
