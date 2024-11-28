@@ -362,7 +362,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -969,8 +969,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 0.0000081062, y: -0.00002718}
+  m_SizeDelta: {x: 41.6946, y: 40.6582}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &393056008
 MonoBehaviour:
@@ -1042,6 +1042,11 @@ MonoBehaviour:
   signUpSceneName: SignUp_PageScene
   recoverPasswordSceneName: RecoverPassword_PageScene
   mainMenuSceneName: MainMenu_PageScene
+  usernameField: {fileID: 148336834}
+  passwordField: {fileID: 1241602287}
+  rememberMe: {fileID: 215002015}
+  logInBtn: {fileID: 951062712}
+  signUpBtn: {fileID: 1744540557}
 --- !u!4 &560621043
 Transform:
   m_ObjectHideFlags: 0
@@ -1301,7 +1306,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
