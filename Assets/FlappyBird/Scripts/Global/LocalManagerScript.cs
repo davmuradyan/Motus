@@ -32,7 +32,6 @@ public class LocalManager : MonoBehaviour
         RestartGame += Initialize;
         RestartGame += birdScript.InitializeBird;
         RestartGame += pipeSpawner.StartAgain;
-        RestartGame += signalGenerator.Initialize;
     }
 
     // Function to initialize canvases

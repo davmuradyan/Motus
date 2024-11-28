@@ -10,13 +10,14 @@ public class BirdScript : MonoBehaviour
     [SerializeField] private PipeSpawnerScript pipeSpawner;
     [SerializeField] private LocalManager localManager;
 
-    [Header("Private variables")]
+    [Header("Variables")]
     private bool isDead;
     [SerializeField] private float minAllowedHeight;
     [SerializeField] private float maxAllowedHeight;
     [SerializeField] private float initialX;
     [SerializeField] private float initialY;
     [SerializeField] private float timeToDie;
+    internal bool handFound;
 
     // The event when bird dies
     public event Action BirdDied;
@@ -32,20 +33,20 @@ public class BirdScript : MonoBehaviour
     private void SubscribeFunctionsToBirdDied() {
         BirdDied += pipeSpawner.BirdDied;
         BirdDied += scoreKeeper.ScoreForEndgame;
-        BirdDied += signalGenerator.BirdDied;
     }
 
     private void Update() {
-        // MoveBird();
+        MoveBird();
     }
 
     // Function to initialize the bird
     internal void InitializeBird() {
         transform.position = new Vector3(initialX, initialY, 0);
         isDead = false;
+        handFound = false;
         gameObject.SetActive(true);
         pipeSpawner.isBirdDied = isDead;
-        transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+        transform.GetComponent<Rigidbody2D>().gravityScale = 0.5f;
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -59,7 +60,8 @@ public class BirdScript : MonoBehaviour
 
     // Function to kill bird when it collides with pipes
     private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.gameObject.tag == "Pipe" && !isDead) {
+        Debug.Log(collision.gameObject.tag);
+        if((collision.gameObject.tag == "Pipe" || collision.gameObject.tag == "Ground") && !isDead) {
             StartCoroutine(Die());
         }
     }
@@ -67,7 +69,6 @@ public class BirdScript : MonoBehaviour
     // Function to kill the bird
     private IEnumerator Die() {
         isDead = true;
-        transform.GetComponent<Rigidbody2D>().gravityScale = 1;
         BirdDied?.Invoke();
 
         yield return new WaitForSeconds(timeToDie);
@@ -75,24 +76,34 @@ public class BirdScript : MonoBehaviour
         localManager.BirdDied();
     }
 
-    // Function to convert signal into height of bird
-    private float ConvertSignal(float signal) {
-        if (signal < 0 || signal > 1)
-        {
-            throw new Exception("Signal should be a float number from [0;1] interval");
-        }
-
-        float newHeight = (maxAllowedHeight - minAllowedHeight) * signal + minAllowedHeight;
-
-        return newHeight;
-    }
 
     // Function to move the bird
-    private void MoveBird() {
-        if (!isDead) {
+    private void MoveBird()
+    {
+        if (!isDead && handFound)
+        {
             float signal = signalGenerator.GetSignal();
-            float height = ConvertSignal(signal);
-            transform.position = new Vector3(transform.position.x, height, 0);
+
+            Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
+
+            // Check if signal is 1 (tap detected).
+            if (signal == 1)
+            {
+                // Apply upward force.
+                rb.velocity = new Vector2(rb.velocity.x, 3f); // Adjust "5f" for the tap force strength.
+                transform.rotation = Quaternion.Euler(0, 0, 35); // Rotate upwards briefly.
+            }
+
+            // Smoothly rotate downward as the bird falls.
+            if (rb.velocity.y < 0)
+            {
+                float downwardAngle = Mathf.Lerp(0, -90, -rb.velocity.y / 5f); // Adjust "10f" for smoothing.
+                transform.rotation = Quaternion.Euler(0, 0, downwardAngle);
+            }
+
+            // Clamp the bird's position to stay within allowed bounds.
+            float clampedY = Mathf.Clamp(transform.position.y, minAllowedHeight, maxAllowedHeight);
+            transform.position = new Vector3(transform.position.x, clampedY, 0);
         }
     }
 }

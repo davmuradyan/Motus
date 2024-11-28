@@ -2054,6 +2054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MultiHandLandmarkList: {fileID: 1870264074}
   pipeSpawner: {fileID: 270419069}
+  birdScript: {fileID: 2050913928}
 --- !u!4 &1268667104
 Transform:
   m_ObjectHideFlags: 0
@@ -2615,7 +2616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   tresholdX: -5
-  backgroundSpawner: {fileID: 0}
+  backgroundSpawner: {fileID: 1176668349}
 --- !u!1 &1477561508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   tresholdX: -5
-  backgroundSpawner: {fileID: 0}
+  backgroundSpawner: {fileID: 1176668349}
 --- !u!61 &1477561511
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3155,7 +3156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   tresholdX: -5
-  backgroundSpawner: {fileID: 0}
+  backgroundSpawner: {fileID: 1176668349}
 --- !u!61 &2036295864
 BoxCollider2D:
   m_ObjectHideFlags: 0

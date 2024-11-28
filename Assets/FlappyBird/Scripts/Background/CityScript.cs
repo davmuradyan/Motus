@@ -30,7 +30,7 @@ public class CityScript : MonoBehaviour, ISpawnable
         }
         else
         {
-            Debug.Log("Night");
+           
             transform.gameObject.GetComponent<SpriteRenderer>().sprite = CityNight;
         }
     }
