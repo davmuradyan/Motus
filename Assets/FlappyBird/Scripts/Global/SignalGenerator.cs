@@ -43,7 +43,6 @@ public class SignalGenerator : MonoBehaviour
         {
             if (IsSubset(closedFingers, pattern))
             {
-                Debug.Log("Tap gesture detected!");
                 return 1;
             }
         }
@@ -59,7 +58,6 @@ public class SignalGenerator : MonoBehaviour
 
         // Calculate distances for each finger.
         Vector3 wrist = points[0].transform.position;
-        Debug.Log(wrist.x);
 
         // Index finger (landmarks 8, 7)
         if (IsFingerClosed(wrist, points[8].transform.position, points[7].transform.position))

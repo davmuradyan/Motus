@@ -61,7 +61,8 @@ public class BirdScript : MonoBehaviour
     // Function to kill bird when it collides with pipes
     private void OnCollisionEnter2D(Collision2D collision) {
         Debug.Log(collision.gameObject.tag);
-        if((collision.gameObject.tag == "Pipe" || collision.gameObject.tag == "Ground") && !isDead) {
+        if(((collision.gameObject.tag == "Pipe") || (collision.gameObject.tag == "Ground")) && !isDead) {
+            Debug.Log(collision.gameObject.tag);
             StartCoroutine(Die());
         }
     }
