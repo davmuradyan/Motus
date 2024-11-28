@@ -12,7 +12,7 @@ public class SignalGenerator : MonoBehaviour
     private GameObject[] points = new GameObject[21];
 
     [Header("Private variables")]
-    private bool hasFoundTheHand = false;
+    internal bool hasFoundTheHand = false;
 
     [Header("Scripts")]
     [SerializeField] PipeSpawnerScript pipeSpawner;

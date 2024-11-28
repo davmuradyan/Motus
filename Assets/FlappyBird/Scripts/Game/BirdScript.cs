@@ -80,30 +80,46 @@ public class BirdScript : MonoBehaviour
     // Function to move the bird
     private void MoveBird()
     {
-        if (!isDead && handFound)
+        if (!isDead)
         {
-            float signal = signalGenerator.GetSignal();
-
-            Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
-
-            // Check if signal is 1 (tap detected).
-            if (signal == 1)
+            // Check if a hand is detected
+            if (signalGenerator.hasFoundTheHand)
             {
-                // Apply upward force.
-                rb.velocity = new Vector2(rb.velocity.x, 3f); // Adjust "5f" for the tap force strength.
-                transform.rotation = Quaternion.Euler(0, 0, 35); // Rotate upwards briefly.
-            }
+                Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
 
-            // Smoothly rotate downward as the bird falls.
-            if (rb.velocity.y < 0)
+                // Enable gravity when the hand is detected
+                rb.gravityScale = 0.5f;
+
+                float signal = signalGenerator.GetSignal();
+
+                // Check if signal is 1 (tap detected).
+                if (signal == 1)
+                {
+                    // Apply upward force
+                    rb.velocity = new Vector2(rb.velocity.x, 3f); // Adjust "5f" for the tap force strength.
+                    transform.rotation = Quaternion.Euler(0, 0, 25); // Rotate upwards briefly.
+                }
+
+                // Smoothly rotate downward as the bird falls
+                if (rb.velocity.y < 0)
+                {
+                    float downwardAngle = Mathf.Lerp(0, -90, -rb.velocity.y / 5f); // Adjust "10f" for smoothing.
+                    transform.rotation = Quaternion.Euler(0, 0, downwardAngle);
+                }
+
+                // Clamp the bird's position to stay within allowed bounds
+                float clampedY = Mathf.Clamp(transform.position.y, minAllowedHeight, maxAllowedHeight);
+                transform.position = new Vector3(transform.position.x, clampedY, 0);
+            }
+            else
             {
-                float downwardAngle = Mathf.Lerp(0, -90, -rb.velocity.y / 5f); // Adjust "10f" for smoothing.
-                transform.rotation = Quaternion.Euler(0, 0, downwardAngle);
+                // If no hand is detected, disable gravity and keep the bird stationary
+                Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
+                rb.gravityScale = 0f;
+                rb.velocity = Vector2.zero; // Stop the bird from moving
+                transform.rotation = Quaternion.Euler(0, 0, 0); // Reset rotation
             }
-
-            // Clamp the bird's position to stay within allowed bounds.
-            float clampedY = Mathf.Clamp(transform.position.y, minAllowedHeight, maxAllowedHeight);
-            transform.position = new Vector3(transform.position.x, clampedY, 0);
         }
     }
+
 }
