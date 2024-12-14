@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PipePrefabScript : MonoBehaviour, ISpawnable
 {
-    [SerializeField] float speed = 1;
+    public float speed { get; set; }
     [SerializeField] float tresholdX = -3;
 
     public bool isAvailable {  get; set; }
     public GameObject gameObject { get; set; }
     private void Start() {
         gameObject = transform.gameObject;
+        speed = 2;
     }
     private void Update() {
         if (tresholdX <= transform.position.x) {

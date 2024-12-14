@@ -41,6 +41,12 @@ internal class CustomArray<T> : IEnumerable<T> where T : ISpawnable {
         return item;
     }
 
+    public void Freeze() {
+        foreach (var i in array) {
+            i.speed = 0;
+        }
+    }
+
     public int Length() {
         return array.Length;
     }

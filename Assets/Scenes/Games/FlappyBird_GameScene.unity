@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270419070}
-  - component: {fileID: 270419069}
+  - component: {fileID: 270419071}
   m_Layer: 0
   m_Name: PipeSpawner
   m_TagString: Untagged
@@ -316,7 +316,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &270419069
+--- !u!4 &270419070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270419068}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 361375666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270419071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -335,21 +350,6 @@ MonoBehaviour:
   levelTimerDelta: 0.1
   birdScript: {fileID: 2050913928}
   leavingTheGame: 0
---- !u!4 &270419070
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270419068}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 361375666}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361375665
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birdScript: {fileID: 2050913928}
-  pipeSpawner: {fileID: 270419069}
+  pipeSpawner: {fileID: 270419071}
   signalGenerator: {fileID: 1268667103}
   MainGame_Canvas: {fileID: 361375665}
   EndGame_Canvas: {fileID: 1488360126}
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   HighestScore_TMP: {fileID: 491687602}
   birdScript: {fileID: 2050913928}
   backgroundSpawner: {fileID: 1176668349}
-  pipeSpawner: {fileID: 270419069}
+  pipeSpawner: {fileID: 270419071}
 --- !u!4 &1191303403
 Transform:
   m_ObjectHideFlags: 0
@@ -2053,7 +2053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MultiHandLandmarkList: {fileID: 1870264074}
-  pipeSpawner: {fileID: 270419069}
+  pipeSpawner: {fileID: 270419071}
   birdScript: {fileID: 2050913928}
 --- !u!4 &1268667104
 Transform:
@@ -2614,7 +2614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681b31f63a1c32c418f47fdea18ab4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   tresholdX: -5
   backgroundSpawner: {fileID: 1176668349}
 --- !u!1 &1477561508
@@ -2663,7 +2662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681b31f63a1c32c418f47fdea18ab4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   tresholdX: -5
   backgroundSpawner: {fileID: 1176668349}
 --- !u!61 &1477561511
@@ -3154,7 +3152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681b31f63a1c32c418f47fdea18ab4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   tresholdX: -5
   backgroundSpawner: {fileID: 1176668349}
 --- !u!61 &2036295864
@@ -3439,8 +3436,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreKeeper: {fileID: 1191303402}
   signalGenerator: {fileID: 1268667103}
-  pipeSpawner: {fileID: 270419069}
+  pipeSpawner: {fileID: 270419071}
   localManager: {fileID: 878444527}
+  backgroundSpawner: {fileID: 1176668349}
   minAllowedHeight: -3.35
   maxAllowedHeight: 3.35
   initialX: -1.3

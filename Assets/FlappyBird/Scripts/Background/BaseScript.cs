@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class BaseScript : MonoBehaviour, ISpawnable
 {
     [Header("Variables")]
-    [SerializeField] float speed = 1;
+    
     [SerializeField] float tresholdX = -3;
+    public float speed { get; set; }
     public bool isAvailable {  get; set; }
     public GameObject gameObject { get; set; }
     internal event Action NewBase;
@@ -17,6 +18,7 @@ public class BaseScript : MonoBehaviour, ISpawnable
     [SerializeField] private BackgroundSpawnerScript backgroundSpawner;
     private void Start() {
         gameObject = transform.gameObject;
+        speed = 2;
     }
 
     private void Update() {

@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class CityScript : MonoBehaviour, ISpawnable
 {
-    [SerializeField] float speed = 1;
     [SerializeField] float tresholdX = -3;
     [SerializeField] private Sprite CityDay;
     [SerializeField] private Sprite CityNight;
+    public float speed { get; set; }
     public GameObject gameObject { get; set; }
     public bool isAvailable { get; set; }
     public bool isDay;
@@ -15,6 +15,7 @@ public class CityScript : MonoBehaviour, ISpawnable
         isDay = true;
         isAvailable = false;
         gameObject = transform.gameObject;
+        speed = 1.5f;
     }
 
     private void Update() {

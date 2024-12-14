@@ -13,8 +13,8 @@ public class BackgroundSpawnerScript : MonoBehaviour
     bool isBaseArrayNull = true;
     bool isCityArrayNull = true;
     [SerializeField] float baseHeight = -4.9f;
-    private CustomArray<BaseScript> Bases;
-    private CustomArray<CityScript> Cities;
+    internal CustomArray<BaseScript> Bases;
+    internal CustomArray<CityScript> Cities;
     private bool leavingTheGame;
     [SerializeField] private float timerForBase;
     [SerializeField] private float timerForCity;
