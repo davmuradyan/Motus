@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -140,12 +140,16 @@ public class LocalManagerSignUp : MonoBehaviour
 
     private bool IsValidEmail(string email)
     {
-        return email.Contains("@") && email.Contains(".");
+        return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
     }
 
     private bool IsValidBirthDate(string birthDate)
     {
-        return System.DateTime.TryParse(birthDate, out _);
+        if (DateTime.TryParse(birthDate, out var parsedDate))
+        {
+            return parsedDate <= DateTime.Now;
+        }
+        return false;
     }
 
     private bool IsValidPhoneNumber(string phoneNumber)
