@@ -230,7 +230,7 @@ MonoBehaviour:
   m_text: GAMES
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
-  m_sharedMaterial: {fileID: -3941017701335831089, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
+  m_sharedMaterial: {fileID: -4827905591611159283, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.3773956, y: -902.1049}
+  m_AnchoredPosition: {x: 0, y: -732.9909}
   m_SizeDelta: {x: 874.8775, y: 145.3501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &441394134
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_text: PROGRESS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
-  m_sharedMaterial: {fileID: -3941017701335831089, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
+  m_sharedMaterial: {fileID: -4827905591611159283, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -607,7 +607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5534, y: -310}
+  m_AnchoredPosition: {x: 0, y: -140.88599}
   m_SizeDelta: {x: 892.74, y: 167.103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135234155
@@ -843,7 +843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.3988, y: 1.886}
+  m_AnchoredPosition: {x: 0, y: 171}
   m_SizeDelta: {x: 1077.2, y: 2336.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1542751150
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_text: Log Out
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
-  m_sharedMaterial: {fileID: -3941017701335831089, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
+  m_sharedMaterial: {fileID: -4827905591611159283, guid: 8453b6f2e82cf6942a6091b3448aedc1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1122,7 +1122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5529, y: 183.52539}
+  m_AnchoredPosition: {x: 0, y: 352.6394}
   m_SizeDelta: {x: 892.7399, y: 194.514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1906675559
@@ -1230,6 +1230,7 @@ GameObject:
   - component: {fileID: 1998519334}
   - component: {fileID: 1998519333}
   - component: {fileID: 1998519332}
+  - component: {fileID: 1998519335}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1254,8 +1255,8 @@ Camera:
   m_GameObject: {fileID: 1998519331}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1311,6 +1312,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1998519335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998519331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
