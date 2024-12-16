@@ -23,10 +23,14 @@ public class LocalManagerLogIn : MonoBehaviour
     [SerializeField] private Button logInBtn;
     [SerializeField] private Button signUpBtn;
 
+    [Header("Error Messages")]
+    [SerializeField] private TextMeshProUGUI errorMessage;
+
     private void Start()
     {
-        // Initialize button states
+        // Initialize button states and error messages
         logInBtn.interactable = false;
+        errorMessage.text = string.Empty;
 
         // Add listeners to input fields
         usernameField.onValueChanged.AddListener(_ => ValidateInput());
@@ -51,27 +55,51 @@ public class LocalManagerLogIn : MonoBehaviour
 
         if (logInBtn.interactable)
         {
-            Debug.Log($"Logging in with Username: {username}, Password: {password}");
-
-            /* Check Remember Me toggle
-            if (rememberMe.isOn)
+            if (ValidateLoginCredentials(username, password))
             {
-                Debug.Log("Remember Me is ON: Save credentials locally.");
-                // Save credentials logic (e.g., PlayerPrefs or a secure method)
-            }*/
+                Debug.Log($"Logging in with Username: {username}");
 
-            // Navigate to the main menu
-            StartCoroutine(LoadSceneAsync(mainMenuSceneName));
+                // Check Remember Me toggle
+                if (rememberMe.isOn)
+                {
+                    Debug.Log("Remember Me is ON: Save credentials locally.");
+                    SaveCredentials(username, password);
+                }
+
+                // Navigate to the main menu
+                StartCoroutine(LoadSceneAsync(mainMenuSceneName));
+            }
+            else
+            {
+                errorMessage.text = "Invalid username or password.";
+                Debug.LogWarning("Login failed: Invalid credentials.");
+            }
         }
         else
         {
-            Debug.LogWarning("Cannot log in, fields are incomplete.");
+            errorMessage.text = "Fields cannot be empty.";
+            Debug.LogWarning("Cannot log in: Fields are incomplete.");
         }
     }
 
     public void ForgotPassButtonClickedFromLogin()
     {
         StartCoroutine(LoadSceneAsync(recoverPasswordSceneName));
+    }
+
+    private bool ValidateLoginCredentials(string username, string password)
+    {
+        // Placeholder for actual validation logic, such as checking a database or API
+        // Replace with real authentication logic
+        return username == "testUser" && password == "testPassword";
+    }
+
+    private void SaveCredentials(string username, string password)
+    {
+        // Placeholder for saving credentials locally
+        // Use PlayerPrefs or a secure storage method
+        PlayerPrefs.SetString("SavedUsername", username);
+        PlayerPrefs.SetString("SavedPassword", password);
     }
 
     private IEnumerator LoadSceneAsync(string sceneName)
@@ -83,4 +111,3 @@ public class LocalManagerLogIn : MonoBehaviour
         }
     }
 }
-
