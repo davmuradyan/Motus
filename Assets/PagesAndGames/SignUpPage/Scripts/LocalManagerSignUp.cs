@@ -1,5 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,14 +31,24 @@ public class LocalManagerSignUp : MonoBehaviour
     [Header("Error Messages")]
     [SerializeField] private TextMeshProUGUI errorMessage;
 
+    [Header("Canvas")]
+    [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject Message;
+
+    private bool isOkay;
+
     private void Start()
     {
         // Initialize UI state
         termsCheckBox.isOn = false;
         signUpButton.interactable = false;
         errorMessage.text = string.Empty;
+        Canvas.SetActive(true);
+        Message.SetActive(false);
+        isOkay = false;
+        
 
-        // Add listeners to check input fields
+        LoadUserData(); // Load data from PlayerPrefs if available
         AddInputFieldListeners();
     }
 
@@ -55,7 +66,6 @@ public class LocalManagerSignUp : MonoBehaviour
 
     private void CheckSignUpButtonState()
     {
-        // Check if all fields are filled and terms checkbox is checked
         if (!string.IsNullOrEmpty(FirstName.text) &&
             !string.IsNullOrEmpty(LastName.text) &&
             !string.IsNullOrEmpty(Email.text) &&
@@ -75,17 +85,23 @@ public class LocalManagerSignUp : MonoBehaviour
 
     public void SignUpButtonClickedFromSignUp()
     {
-        errorMessage.text = string.Empty; // Clear previous errors
-        if (ValidateInputs())
+        Message.SetActive(false);
+        errorMessage.text = string.Empty;
+        isOkay = ValidateInputs();
+        
+        if (isOkay)
         {
-            Debug.Log("Sign-up process successful!");
-            StartCoroutine(LoadSceneAsync(mainMenuSceneName));
-        }
+            ClearUserData(); // Clear PlayerPrefs data upon successful signup
+            Message.SetActive(true);
+            errorMessage.text ="Confirm your email, then you will be able to sign in successfully";
+        
+;        }
     }
 
     private bool ValidateInputs()
-    {
-
+    {   
+        Message.SetActive(true);
+        errorMessage.color = Color.red;
         // First Name validation
         if (string.IsNullOrEmpty(FirstName.text))
         {
@@ -135,17 +151,33 @@ public class LocalManagerSignUp : MonoBehaviour
             return false;
         }
 
+        errorMessage.color= Color.white;
         return true; // All validations passed
     }
 
+    public void ErrorOkBtnClicked()
+    {
+        if (isOkay)
+        {
+            StartCoroutine(LoadSceneAsync(loginSceneName));           
+        }
+        else
+        {
+            Message.SetActive(false);
+        }
+    }
     private bool IsValidEmail(string email)
     {
-        return email.Contains("@") && email.Contains(".");
+        return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
     }
 
     private bool IsValidBirthDate(string birthDate)
     {
-        return System.DateTime.TryParse(birthDate, out _);
+        if (DateTime.TryParse(birthDate, out var parsedDate))
+        {
+            return parsedDate <= DateTime.Now;
+        }
+        return false;
     }
 
     private bool IsValidPhoneNumber(string phoneNumber)
@@ -155,68 +187,66 @@ public class LocalManagerSignUp : MonoBehaviour
 
     private bool IsValidPassword(string password)
     {
-        if (string.IsNullOrEmpty(password) || password.Length < 8)
-            return false;
-        if (!ContainsUppercase(password))
-            return false;
-        if (!ContainsLowercase(password))
-            return false;
-        if (!ContainsDigit(password))
-            return false;
-        if (!ContainsSpecialCharacter(password))
-            return false;
-
-        return true;
+        return password.Length >= 8 &&
+               ContainsUppercase(password) &&
+               ContainsLowercase(password) &&
+               ContainsDigit(password) &&
+               ContainsSpecialCharacter(password);
     }
 
-    private bool ContainsUppercase(string input)
-    {
-        foreach (char c in input)
-        {
-            if (char.IsUpper(c))
-                return true;
-        }
-        return false;
-    }
-
-    private bool ContainsLowercase(string input)
-    {
-        foreach (char c in input)
-        {
-            if (char.IsLower(c))
-                return true;
-        }
-        return false;
-    }
-
-    private bool ContainsDigit(string input)
-    {
-        foreach (char c in input)
-        {
-            if (char.IsDigit(c))
-                return true;
-        }
-        return false;
-    }
-
-    private bool ContainsSpecialCharacter(string input)
-    {
-        foreach (char c in input)
-        {
-            if (!char.IsLetterOrDigit(c))
-                return true;
-        }
-        return false;
-    }
+    private bool ContainsUppercase(string input) => input.Any(char.IsUpper);
+    private bool ContainsLowercase(string input) => input.Any(char.IsLower);
+    private bool ContainsDigit(string input) => input.Any(char.IsDigit);
+    private bool ContainsSpecialCharacter(string input) => input.Any(c => !char.IsLetterOrDigit(c));
 
     public void LoginButtonClickedFromSignUp()
     {
+        SaveUserData(); // Save data before navigating to login
         StartCoroutine(LoadSceneAsync(loginSceneName));
     }
 
     public void AgreeWithTermsButtonClickedFromSignUp()
     {
+        SaveUserData(); // Save data before navigating to terms
         StartCoroutine(LoadSceneAsync(termsSceneName));
+    }
+
+    private void SaveUserData()
+    {
+        PlayerPrefs.SetString("FirstName", FirstName.text);
+        PlayerPrefs.SetString("LastName", LastName.text);
+        PlayerPrefs.SetString("Email", Email.text);
+        PlayerPrefs.SetString("BirthDate", BirthDate.text);
+        PlayerPrefs.SetString("PhoneNumber", PhoneNumber.text);
+        PlayerPrefs.SetString("Password", Password.text);
+        PlayerPrefs.SetString("ConfirmPassword", ConfirmPassword.text);
+        PlayerPrefs.SetInt("TermsAccepted", termsCheckBox.isOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadUserData()
+    {
+        FirstName.text = PlayerPrefs.GetString("FirstName", "");
+        LastName.text = PlayerPrefs.GetString("LastName", "");
+        Email.text = PlayerPrefs.GetString("Email", "");
+        BirthDate.text = PlayerPrefs.GetString("BirthDate", "");
+        PhoneNumber.text = PlayerPrefs.GetString("PhoneNumber", "");
+        Password.text = PlayerPrefs.GetString("Password", "");
+        ConfirmPassword.text = PlayerPrefs.GetString("ConfirmPassword", "");
+        termsCheckBox.isOn = PlayerPrefs.GetInt("TermsAccepted", 0) == 1;
+    }
+
+    private void ClearUserData()
+    {
+        PlayerPrefs.DeleteKey("FirstName");
+        PlayerPrefs.DeleteKey("LastName");
+        PlayerPrefs.DeleteKey("Email");
+        PlayerPrefs.DeleteKey("BirthDate");
+        PlayerPrefs.DeleteKey("PhoneNumber");
+        PlayerPrefs.DeleteKey("Password");
+        PlayerPrefs.DeleteKey("ConfirmPassword");
+        PlayerPrefs.DeleteKey("TermsAccepted");
+        PlayerPrefs.Save();
     }
 
     private IEnumerator LoadSceneAsync(string sceneName)
