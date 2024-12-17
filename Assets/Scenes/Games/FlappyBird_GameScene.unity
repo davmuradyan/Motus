@@ -1675,7 +1675,7 @@ MonoBehaviour:
   City_Prefab: {fileID: 8789907172458017282, guid: eb40b5a34e0ede540b728fa95ce740f9, type: 3}
   baseHeight: -4.9
   timerForBase: 2.49
-  timerForCity: 6.331
+  timerForCity: 4.2
 --- !u!1001 &1179015744
 PrefabInstance:
   m_ObjectHideFlags: 0

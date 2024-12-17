@@ -6,67 +6,67 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/Login_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/Login_PageScene.unity
     guid: 0a78e1c28dddcb04fae2ccbb13587ca4
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/Signup_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/Signup_PageScene.unity
     guid: 805f34287f72ad544ade9c1736eb4017
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/RecoverPassword_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/RecoverPassword_PageScene.unity
     guid: 956293d392c2d864394a320292c63262
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/Terms_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/Terms_PageScene.unity
     guid: 890e61acabf785d4b9183327220dd5c2
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/FlappyBirdProgress_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/FlappyBirdProgress_PageScene.unity
     guid: b73b6175fc52ab545a17e8bf495de101
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/HandProgressHistory_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/HandProgressHistory_PageScene.unity
     guid: e1586b2ba5f99024fb26bd8eef2b4410
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/GameProgressHistory_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/GameProgressHistory_PageScene.unity
     guid: f089347988a20924282b1d83b730752b
   - enabled: 1
     path: Assets/Scenes/Games/FlappyBird_GameScene.unity
     guid: 0a3da33b58e2612428489da0de32d2d4
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/MainMenu_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/MainMenu_PageScene.unity
     guid: 5b9fcc931bfee504e991e96023bebdd6
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/Progress_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/Progress_PageScene.unity
     guid: 117e25c014872f6439e18b82100d2df9
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/Games_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/Games_PageScene.unity
     guid: b04857960564a274d859c50d86b3e926
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/RecoverPassword_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/RecoverPassword_PageScene.unity
     guid: 956293d392c2d864394a320292c63262
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module1/Terms_PageScene.unity
+    path: Assets/Scenes/Pages/Module1/Terms_PageScene.unity
     guid: 890e61acabf785d4b9183327220dd5c2
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/FlappyBirdProgress_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/FlappyBirdProgress_PageScene.unity
     guid: b73b6175fc52ab545a17e8bf495de101
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/HandProgressHistory_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/HandProgressHistory_PageScene.unity
     guid: e1586b2ba5f99024fb26bd8eef2b4410
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/GameProgressHistory_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/GameProgressHistory_PageScene.unity
     guid: f089347988a20924282b1d83b730752b
   - enabled: 1
     path: Assets/Scenes/Games/FlappyBird_GameScene.unity
     guid: 0a3da33b58e2612428489da0de32d2d4
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/MainMenu_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/MainMenu_PageScene.unity
     guid: 5b9fcc931bfee504e991e96023bebdd6
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/Progress_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/Progress_PageScene.unity
     guid: 117e25c014872f6439e18b82100d2df9
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/Games_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/Games_PageScene.unity
     guid: b04857960564a274d859c50d86b3e926
   - enabled: 1
-    path: Assets/Scenes/Games/Pages/Module2/Games_PageScene.unity
+    path: Assets/Scenes/Pages/Module2/Games_PageScene.unity
     guid: b04857960564a274d859c50d86b3e926
   - enabled: 1
     path: Assets/Scenes/Games/FlappyBird_GameScene.unity
