@@ -19,8 +19,11 @@ public class BackgroundSpawnerScript : MonoBehaviour
     [SerializeField] private float timerForBase;
     [SerializeField] private float timerForCity;
 
+    internal bool birdDied;
+
     private void Start() {
         leavingTheGame = false;
+        birdDied = false;
         StartCoroutine(BaseTimer());
         StartCoroutine(CityTimer());
     }
@@ -77,8 +80,17 @@ public class BackgroundSpawnerScript : MonoBehaviour
     // This function terminates when player leaves the game
     IEnumerator BaseTimer() {
         while (!leavingTheGame) {
-            yield return new WaitForSeconds(timerForBase);
-            InitializeBase();
+            if (!birdDied)
+            {
+                yield return new WaitForSeconds(timerForBase);
+                if (!birdDied) {
+                    InitializeBase();
+                }
+            }
+            else
+            {
+                yield break;
+            }
         }
     }
 
@@ -86,8 +98,18 @@ public class BackgroundSpawnerScript : MonoBehaviour
     // This function terminates when player leaves the game
     IEnumerator CityTimer() {
         while (!leavingTheGame) {
-            yield return new WaitForSeconds(timerForCity);
-            InitializeCity();
+            if (!birdDied)
+            {
+                yield return new WaitForSeconds(timerForCity);
+                if (!birdDied)
+                {
+                    InitializeCity();
+                }
+            }
+            else
+            {
+                yield break;   
+            }
         }
     }
 
@@ -97,5 +119,10 @@ public class BackgroundSpawnerScript : MonoBehaviour
         {
             city.SetDay(!city.IsDay());
         }
+    }
+
+    // This function is subscribed to BirdDied event
+    internal void BirdDied() {
+        birdDied = true;
     }
 }

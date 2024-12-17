@@ -42,7 +42,7 @@ public class ScoreKeeperScript : MonoBehaviour
         if (score % 3 == 0)
         {
             DayNightShift?.Invoke();
-            pipeSpawner.DiminulePipeTime();
+            pipeSpawner.ReducePipeTime();
         }
     }
     // Function for transfering score to EndCanvas (not complete)
