@@ -44,19 +44,6 @@ public class LocalManagerPass : MonoBehaviour
         }
     }
 
-    /*private void ValidateEmailField()
-    {
-   
-        if (!IsValidEmail(emailField.text))
-        {
-            errorMessage.text = "Invalid email format.";
-            Message.SetActive(true);
-        }
-        else
-        {
-            errorMessage.text = string.Empty;
-        }
-    }*/
 
     public void ErrorOkBtnClicked()
     {
@@ -75,6 +62,7 @@ public class LocalManagerPass : MonoBehaviour
             errorMessage.text = "Recovery email sent successfully. Go check your email";
             errorMessage.color = Color.white;
             Message.SetActive(true);
+            SubmitBtn.interactable = false;
         }
     }
 

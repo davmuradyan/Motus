@@ -26,11 +26,17 @@ public class LocalManagerLogIn : MonoBehaviour
     [Header("Error Messages")]
     [SerializeField] private TextMeshProUGUI errorMessage;
 
+    [Header("Canvas")]
+    [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject Message;
+
     private void Start()
     {
         // Initialize button states and error messages
         logInBtn.interactable = false;
         errorMessage.text = string.Empty;
+        Message.SetActive(false);
+        Canvas.SetActive(true);
 
         // Add listeners to input fields
         usernameField.onValueChanged.AddListener(_ => ValidateInput());
@@ -70,16 +76,23 @@ public class LocalManagerLogIn : MonoBehaviour
                 StartCoroutine(LoadSceneAsync(mainMenuSceneName));
             }
             else
-            {
+            {   
                 errorMessage.text = "Invalid username or password.";
+                Message.SetActive(true);
                 Debug.LogWarning("Login failed: Invalid credentials.");
             }
         }
         else
         {
+            Message.SetActive(true);
             errorMessage.text = "Fields cannot be empty.";
             Debug.LogWarning("Cannot log in: Fields are incomplete.");
         }
+    }
+
+    public void ErrorOkBtnClicked()
+    {
+        Message.SetActive(false);
     }
 
     public void ForgotPassButtonClickedFromLogin()

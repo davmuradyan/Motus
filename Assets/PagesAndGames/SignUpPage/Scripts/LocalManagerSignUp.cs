@@ -109,10 +109,23 @@ public class LocalManagerSignUp : MonoBehaviour
             return false;
         }
 
+        if (!isValidName(FirstName.text))
+        {
+            errorMessage.text = "First name cannot be longeer than 35 characters";
+            return false;
+        }
+
+
         // Last Name validation
         if (string.IsNullOrEmpty(LastName.text))
         {
             errorMessage.text = "Last Name is required.";
+            return false;
+        }
+
+        if (!isValidSurname(LastName.text))
+        {
+            errorMessage.text = "Last name cannot be longer than 35 characters";
             return false;
         }
 
@@ -166,6 +179,17 @@ public class LocalManagerSignUp : MonoBehaviour
             Message.SetActive(false);
         }
     }
+
+    private bool isValidName(string name)
+    {
+        return name.Length <= 35;
+    }
+
+    private bool isValidSurname(string surname)
+    {
+        return surname.Length <= 35;
+    }
+
     private bool IsValidEmail(string email)
     {
         return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
