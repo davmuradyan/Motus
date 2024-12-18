@@ -101,23 +101,6 @@ public class BirdScript : MonoBehaviour
         isDead = true;
         BirdDied?.Invoke();
 
-        //Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
-        //rb.velocity = Vector2.zero; // Stop any motion
-        //rb.gravityScale = 0; // Disable gravity for manual control
-        //transform.rotation = Quaternion.Euler(0, 0, -90); // Rotate bird to face downward
-
-        //// Continue moving down until the bird hits the ground
-        //while (transform.position.y > minAllowedHeight)
-        //{
-        //    transform.position = new Vector3(transform.position.x, transform.position.y - (5f * Time.deltaTime), 0); // Adjust fall speed
-        //    yield return null;
-        //}
-
-        //// Lay still on the ground
-        //transform.position = new Vector3(transform.position.x, minAllowedHeight, 0);
-        //rb.velocity = Vector2.zero; // Ensure no residual velocity
-        //rb.gravityScale = 0; // Ensure gravity is fully off
-
         transform.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         transform.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 

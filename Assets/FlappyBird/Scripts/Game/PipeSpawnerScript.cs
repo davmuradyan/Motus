@@ -40,7 +40,7 @@ public class PipeSpawnerScript : MonoBehaviour
     // Coroutine to spawn pipes
     private IEnumerator PipeTimer()
     {
-        yield return new WaitForSeconds(4.3f);
+        yield return new WaitForSeconds(timerForPipes);
         while (!leavingTheGame)
         {
             // Check if the bird is alive and hand is found
