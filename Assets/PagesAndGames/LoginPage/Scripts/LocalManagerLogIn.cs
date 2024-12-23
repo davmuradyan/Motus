@@ -1,3 +1,4 @@
+using Mono.Unix.Native;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -30,6 +31,9 @@ public class LocalManagerLogIn : MonoBehaviour
     [SerializeField] private GameObject Canvas;
     [SerializeField] private GameObject Message;
 
+    [Header("Scripts")]
+    [SerializeField] APIRequestSender requestSender;
+
     private void Start()
     {
         // Initialize button states and error messages
@@ -61,32 +65,23 @@ public class LocalManagerLogIn : MonoBehaviour
 
         if (logInBtn.interactable)
         {
-            if (ValidateLoginCredentials(username, password))
-            {
-                Debug.Log($"Logging in with Username: {username}");
-
-                // Check Remember Me toggle
-                if (rememberMe.isOn)
-                {
-                    Debug.Log("Remember Me is ON: Save credentials locally.");
-                    SaveCredentials(username, password);
-                }
-
-                // Navigate to the main menu
-                StartCoroutine(LoadSceneAsync(mainMenuSceneName));
-            }
-            else
-            {   
-                errorMessage.text = "Invalid username or password.";
-                Message.SetActive(true);
-                Debug.LogWarning("Login failed: Invalid credentials.");
-            }
+            requestSender.SendLoginRequest(username, password);
         }
         else
         {
             Message.SetActive(true);
             errorMessage.text = "Fields cannot be empty.";
             Debug.LogWarning("Cannot log in: Fields are incomplete.");
+        }
+    }
+
+    public void Enter(bool valid) {
+        if (valid) {
+            StartCoroutine(LoadSceneAsync(mainMenuSceneName));
+        } else {
+            errorMessage.text = "Invalid username or password.";
+            Message.SetActive(true);
+            Debug.LogWarning("Login failed: Invalid credentials.");
         }
     }
 
@@ -103,8 +98,10 @@ public class LocalManagerLogIn : MonoBehaviour
     private bool ValidateLoginCredentials(string username, string password)
     {
         // Placeholder for actual validation logic, such as checking a database or API
+        requestSender.SendLoginRequest(username, password);
+
         // Replace with real authentication logic
-        return username == "testUser" && password == "testPassword";
+        return false;
     }
 
     private void SaveCredentials(string username, string password)

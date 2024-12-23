@@ -35,6 +35,9 @@ public class LocalManagerSignUp : MonoBehaviour
     [SerializeField] private GameObject Canvas;
     [SerializeField] private GameObject Message;
 
+    [Header("Scripts")]
+    [SerializeField] private APIRequestSender requestSender;
+
     private bool isOkay;
 
     private void Start()
@@ -91,11 +94,21 @@ public class LocalManagerSignUp : MonoBehaviour
         
         if (isOkay)
         {
+
+            AddUserRequest user = new AddUserRequest() {
+                firstname = FirstName.text,
+                lastname = LastName.text,
+                email = Email.text,
+                data = BirthDate.text,
+                phonenumber = PhoneNumber.text,
+                password = Password.text
+            };
+            requestSender.SendAddUserRequest(user);
             ClearUserData(); // Clear PlayerPrefs data upon successful signup
             Message.SetActive(true);
             errorMessage.text ="Confirm your email, then you will be able to sign in successfully";
         
-;        }
+        }
     }
 
     private bool ValidateInputs()
